@@ -8,16 +8,16 @@ X = "X"
 O = "O"
 EMPTY = None
 board = [
-    [EMPTY, EMPTY, EMPTY],
+    [X, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY]
 ]
 
-board = [
-    [EMPTY, O, X],
-    [O, X, EMPTY],
-    [X, O, X]
-]
+# board = [
+#     [EMPTY, O, X],
+#     [O, X, EMPTY],
+#     [X, O, X]
+# ]
 
 
 def initial_state():
@@ -46,8 +46,6 @@ def player(board):
         return O
 
 
-
-
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
@@ -61,20 +59,26 @@ def actions(board):
     return options
 
 
-print(actions(board))
+# print(actions(board))
 
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-    raise NotImplementedError
+    row, col = action
+    # raise NotImplementedError
+    if board[row][col] == EMPTY:
+        board[row][col] = player(board)
+        return board
+    else:
+        return 'Invalid choice'
 
 
 def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
+    'hello world'
 
 
 def terminal(board):
