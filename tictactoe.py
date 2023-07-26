@@ -8,6 +8,12 @@ X = "X"
 O = "O"
 EMPTY = None
 
+board = [
+    [EMPTY, O, X],
+    [O, X, EMPTY],
+    [X, O, X]
+]
+
 
 def initial_state():
     """
@@ -29,8 +35,16 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    raise NotImplementedError
+    options = set()
+    # raise NotImplementedError
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == EMPTY:
+                options.add((i, j))
+    return options
 
+
+print(actions(board))
 
 def result(board, action):
     """
