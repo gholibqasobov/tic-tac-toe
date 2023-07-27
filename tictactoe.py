@@ -7,17 +7,6 @@ import math
 X = "X"
 O = "O"
 EMPTY = None
-board = [
-    [X, EMPTY, EMPTY],
-    [EMPTY, EMPTY, EMPTY],
-    [EMPTY, EMPTY, EMPTY]
-]
-
-# board = [
-#     [EMPTY, O, X],
-#     [O, X, EMPTY],
-#     [X, O, X]
-# ]
 
 
 def initial_state():
@@ -59,8 +48,6 @@ def actions(board):
     return options
 
 
-# print(actions(board))
-
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
@@ -78,21 +65,67 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
+    # raise NotImplementedError
+    """
+    [[EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY]]
+    """
+
+    val = None
+    diag = []
+    rev_diag = []
+    for i in range(3):
+        vertical = []
+        if board[i].count(X) == 3:
+            val = X
+        elif board[i].count(O) == 3:
+            val = O
+        for j in range(3):
+            vertical.append(board[j][i])
+            if i == j:
+                diag.append(board[i][j])
+            if i + j == 2:
+                rev_diag.append(board[i][j])
+        if vertical.count(X) == 3:
+            val = X
+        elif vertical.count(O) == 3:
+            val = O
+
+    if diag.count(X) == 3 or rev_diag.count(X) == 3:
+        val = X
+    elif diag.count(O) == 3 or rev_diag.count(O) == 3:
+        val = O
+
+    return val
 
 
 def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    raise NotImplementedError
+    # raise NotImplementedError
+    if winner(board) is not None:
+        return True
+    else:
+        for i in range(3):
+            if not all(board[i]):
+                return False
+
+    return False
 
 
 def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
+    # raise NotImplementedError
+    if winner(board) == 'X':
+        return 1
+    elif winner(board) == 'O':
+        return -1
+    else:
+        return 0
 
 
 def minimax(board):
@@ -100,10 +133,3 @@ def minimax(board):
     Returns the optimal action for the current player on the board.
     """
     raise NotImplementedError
-
-
-
-
-
-
-# print(x_count, y_count)
