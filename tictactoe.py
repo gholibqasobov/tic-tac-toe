@@ -139,7 +139,7 @@ def utility(board):
 
 def minimax(board):
     """
-    Returns the optimal action for the current player on the board.
+    Returns the optimal action for the current player on the boar
     """
     if player(board) == X:
         for action in actions(board):
